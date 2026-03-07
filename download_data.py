@@ -17,18 +17,12 @@ import pandas as pd
 from rdkit import Chem  # type: ignore
 from rdkit.Chem import Descriptors  # type: ignore
 
-# ──────────────────────────────────────────────
-# Paths  — mirror the codabench bundle structure
-# ──────────────────────────────────────────────
-
+# Paths
 ROOT               = Path(__file__).parent
-INPUT_DATA_DIR     = ROOT /"deta" / "dev_phase" / "input_data"
-REFERENCE_DATA_DIR = ROOT / "deta" / "dev_phase" / "reference_data"
+INPUT_DATA_DIR     = ROOT /"data" / "dev_phase" / "input_data"
+REFERENCE_DATA_DIR = ROOT / "data" / "dev_phase" / "reference_data"
 
-# ──────────────────────────────────────────────
 # Challenge config
-# ──────────────────────────────────────────────
-
 CHALLENGE_NAME = "bace_classifier"
 
 DATASET_CONFIG = {
@@ -38,11 +32,7 @@ DATASET_CONFIG = {
     ),
 }
 
-
-# ──────────────────────────────────────────────
 # Data processing helpers
-# ──────────────────────────────────────────────
-
 def property_split(df, smiles_col="SMILES", label_col="Answer",
                    property_type="MW", train_frac=0.8):
     """Split into train/test based on a sorted molecular property."""
@@ -78,10 +68,7 @@ def clean_and_format_dataset(df):
     return df_clean
 
 
-# ──────────────────────────────────────────────
 # Checksum helpers
-# ──────────────────────────────────────────────
-
 def hash_folder(folder_path):
     """Return the Adler32 hash of an entire directory."""
     folder = Path(folder_path)
@@ -107,10 +94,7 @@ def checksum_data(raise_error=False):
     return data_checksum == local_checksum
 
 
-# ──────────────────────────────────────────────
 # Main download routine
-# ──────────────────────────────────────────────
-
 def download_data():
     """Download and save data in the codabench bundle structure."""
 
@@ -171,10 +155,6 @@ def download_data():
     print(f"  input_data/test.csv            : {len(test_clean)} rows  (SMILES only)")
     print(f"  reference_data/test_labels.csv : {len(test_clean)} rows  (Label only)")
 
-
-# ──────────────────────────────────────────────
-# CLI
-# ──────────────────────────────────────────────
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(

@@ -7,8 +7,6 @@ EVAL_SETS = ["test"]
 
 
 def compute_kappa(predictions, targets):
-    # Make sure there is no NaN, as pandas ignores them in mean computation
-    predictions = predictions.fillna(-10).values
     # Return mean of correct predictions
     return cohen_kappa_score(predictions, targets)
 

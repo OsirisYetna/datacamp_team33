@@ -6,93 +6,72 @@ import numpy as np
 import pandas as pd
 
 # Paths
-input_dir = '/app/input_data/'  # Input data
-output_dir = '/app/output/'    # For the predictions
-program_dir = '/app/program'
-submission_dir = '/app/ingested_program'  # The code submitted
+input_dir    = '/app/input_data/'      # Input data (train.csv, test.csv)
+output_dir   = '/app/output/'          # For the predictions
+program_dir  = '/app/program'
+submission_dir = '/app/ingested_program'  # The code submitted by participant
+
 sys.path.append(output_dir)
 sys.path.append(program_dir)
 sys.path.append(submission_dir)
 
 
-def evaluate_model(model, X_test):
-    y_pred = model.predict(X_test)
-    return pd.DataFrame(y_pred)
+def get_data():
+    """Load X_train, y_train and X_test from csv files."""
+    train = pd.read_csv(os.path.join(input_dir, 'train.csv'))
+    X_train = train['SMILES']
+
+    train_labels = pd.read_csv(os.path.join(input_dir, 'train_labels.csv'))
+    y_train = train_labels['Label']
+
+    test = pd.read_csv(os.path.join(input_dir, 'test.csv'))
+    X_test = test['SMILES']
+
+    return X_train, y_train, X_test
 
 
-def get_train_data(data_dir):
-    X_train = pd.read_csv(os.path.join(input_dir, 'train.csv'), header=None)
-    df = pd.read_csv(training_dir / "train.csv")
-    X_train = df["SMILES"]
-    y_train = df["Label"]
-    return X_train, y_train
+def print_bar():
+    """Display a separator bar."""
+    print('-' * 10)
 
 
-def main(data_dir, output_dir):
-    # Here, you can import info from the submission module, to evaluate the
-    # submission
-    from submission import get_model
+def main():
+    """The ingestion program."""
+    print_bar()
+    print('Ingestion program.')
 
-    X_train, y_train = get_train_data(data_dir)
+    from submission import get_model  # Function submitted by the participant
 
-    print("Training the model")
+    start = time.time()
 
+    # Read data
+    print('Reading data')
+    X_train, y_train, X_test = get_data()
+
+    # Initialize model
+    print('Initializing the model')
     model = get_model()
 
-    start = time.time()
+    # Train model
+    print('Training the model')
     model.fit(X_train, y_train)
-    train_time = time.time() - start
-    print("-" * 10)
-    print("Evaluate the model")
-    start = time.time()
-    res = {}
-    for eval_set in EVAL_SETS:
-        X_test = pd.read_csv(data_dir / eval_set / f"{eval_set}.csv")
-        X_smiles = X_test["SMILES"]
-        res[eval_set] = evaluate_model(model, X_smiles)
-    test_time = time.time() - start
-    print("-" * 10)
-    duration = train_time + test_time
-    print(f"Completed Prediction. Total duration: {duration}")
 
-    # Write output files
-    output_dir.mkdir(parents=True, exist_ok=True)
-    with open(output_dir / "metadata.json", "w+") as f:
-        json.dump(dict(train_time=train_time, test_time=test_time), f)
-    for eval_set in EVAL_SETS:
-        filepath = output_dir / f"{eval_set}_predictions.csv"
-        res[eval_set].to_csv(filepath, index=False)
-    print()
-    print("Ingestion Program finished. Moving on to scoring")
+    # Make predictions
+    print('Making predictions')
+    y_pred = model.predict(X_test)
+
+    # Save predictions
+    np.savetxt(os.path.join(output_dir, 'test_predictions.csv'), y_pred, fmt='%d')
+
+    duration = time.time() - start
+    print(f'Completed. Total duration: {duration:.2f}s')
+
+    with open(os.path.join(output_dir, 'metadata.json'), 'w+') as f:
+        json.dump({'duration': duration}, f)
+
+    print('Ingestion program finished. Moving on to scoring.')
+    print_bar()
 
 
-if __name__ == "__main__":
-    import argparse
-
-    parser = argparse.ArgumentParser(
-        description="Ingestion program for codabench"
-    )
-    parser.add_argument(
-        "--data-dir",
-        type=str,
-        default="/app/input_data",
-        help="",
-    )
-    parser.add_argument(
-        "--output-dir",
-        type=str,
-        default="/app/output",
-        help="",
-    )
-    parser.add_argument(
-        "--submission-dir",
-        type=str,
-        default="/app/ingested_program",
-        help="",
-    )
-
-    args = parser.parse_args()
-    sys.path.append(args.submission_dir)
-    sys.path.append(Path(__file__).parent.resolve())
-
-    main(Path(args.data_dir), Path(args.output_dir))
+if __name__ == '__main__':
+    main()
