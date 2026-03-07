@@ -1,12 +1,18 @@
 import json
+import os
 import sys
 import time
-from pathlib import Path
-
+import numpy as np
 import pandas as pd
 
-
-EVAL_SETS = ["test"]
+# Paths
+input_dir = '/app/input_data/'  # Input data
+output_dir = '/app/output/'    # For the predictions
+program_dir = '/app/program'
+submission_dir = '/app/ingested_program'  # The code submitted
+sys.path.append(output_dir)
+sys.path.append(program_dir)
+sys.path.append(submission_dir)
 
 
 def evaluate_model(model, X_test):
@@ -15,8 +21,7 @@ def evaluate_model(model, X_test):
 
 
 def get_train_data(data_dir):
-    data_dir = Path(data_dir)
-    training_dir = data_dir
+    X_train = pd.read_csv(os.path.join(input_dir, 'train.csv'), header=None)
     df = pd.read_csv(training_dir / "train.csv")
     X_train = df["SMILES"]
     y_train = df["Label"]
