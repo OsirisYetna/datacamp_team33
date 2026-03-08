@@ -1,6 +1,7 @@
 pandas
 scikit-learn
 rdkit
+rdkit-pypi
 tokenizers
 numpy
 matplotlib
