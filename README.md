@@ -52,7 +52,7 @@ public and private test set.
 
 ## Extra scripts in the `tools/` folder
 
-- `tools/setup_data.py`: script to generate dummy data for the competition.
+- `download_data.py`: script to generate data for the competition.
   This should be changed to load and preprocess real data for a given
   competition.
 - `tools/create_bundle.py`: script to create the codabench bundle archive from
@@ -64,7 +64,7 @@ public and private test set.
 
 ## Instruction to create the codabench bundle
 
-Make sure that the `setup_data.py` script has been run to generate the data for
+Make sure that the `download_data.py` script has been run to generate the data for
 the competition.
 
 Then, run the `create_bundle.py` script to create the codabench bundle archive:

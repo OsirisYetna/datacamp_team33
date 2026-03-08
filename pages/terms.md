@@ -1,18 +1,55 @@
 # Terms and Conditions
 
-## Lorem Ipsum
+1. Eligibility
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+This challenge is open to students enrolled in the MSc Datascience at IPP and UP-Saclay. Participation is voluntary and free of charge.
 
-## Sed ut perspiciatis
+Participants may compete individually, subject to the rules specified by the course instructors.
 
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae 
-ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit 
-aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam 
-est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore 
-et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, 
-nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae 
-consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+2. Data Usage
+
+The datasets provided for this challenge is available on huggingface and is intended solely for the purpose of this competition. Participants must adhere to the following guidelines regarding data usage:
+- Do not cheat by using external data sources.
+
+3. Training and Evaluation Restrictions
+
+Participants must comply with the following rules:
+
+Any attempt to directly or indirectly train on the test data will result in penalties or disqualification.
+
+4. Submission Rules
+
+Participants must submit:
+
+A compressed folder containing the code necessary to train a model (see page seed.md).
+Submissions must be the original work of the participants.
+
+5. Intellectual Property
+
+Participants retain ownership of the code and models they develop as part of this challenge.
+
+By submitting their results, participants grant the course instructors and the hosting institution a non-exclusive, royalty-free right to:
+
+Use the submissions for grading and evaluation.
+Use anonymized results or visualizations for teaching, presentations, or future course materials.
+
+6. Liability
+
+The organizers provide the data and evaluation infrastructure “as is” and make no guarantees regarding accuracy, completeness, or fitness for a particular purpose.
+
+The organizers are not responsible for:
+
+Technical issues, data loss, or submission failures.
+Any damages or losses arising from participation in the challenge.
+
+7. Modification and Termination
+
+The organizers reserve the right to:
+
+Modify the challenge rules, datasets, or evaluation criteria if necessary.
+Terminate the challenge in case of technical issues or unforeseen circumstances.
+Any changes will be communicated to participants in a timely manner.
+
+8. Acceptance of Terms
+
+By participating in the challenge, participants acknowledge that they have read, understood, and agreed to these Terms and Conditions.

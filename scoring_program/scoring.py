@@ -1,14 +1,14 @@
 import json
 from pathlib import Path
-from sklearn.metrics import cohen_kappa_score
+from sklearn.metrics import accuracy_score
 import pandas as pd
 
 EVAL_SETS = ["test"]
 
 
-def compute_kappa(predictions, targets):
+def compute_accuracy(predictions, targets):
     # Return mean of correct predictions
-    return cohen_kappa_score(predictions, targets)
+    return accuracy_score(targets, predictions)
 
 
 def main(reference_dir, prediction_dir, output_dir):
@@ -17,13 +17,13 @@ def main(reference_dir, prediction_dir, output_dir):
         print(f'Scoring {eval_set}')
 
         predictions = pd.read_csv(
-            prediction_dir / f'{eval_set}_predictions.csv'
-        )
+            prediction_dir / f'{eval_set}_predictions.csv', header=None
+        )[0]
         targets = pd.read_csv(
-            reference_dir / f'{eval_set}.csv'
+            reference_dir / f'{eval_set}_labels.csv'
         )
         y_true = targets["Label"]
-        scores[eval_set] = float(compute_kappa(predictions, y_true))
+        scores[eval_set] = float(compute_accuracy(predictions, y_true))
 
     # Add train and test times in the score
     json_durations = (prediction_dir / 'metadata.json').read_text()
@@ -42,18 +42,21 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Scoring program for codabench"
     )
+    
     parser.add_argument(
         "--reference-dir",
         type=str,
         default="/app/input/ref",
         help="",
     )
+    
     parser.add_argument(
         "--prediction-dir",
         type=str,
         default="/app/input/res",
         help="",
     )
+    
     parser.add_argument(
         "--output-dir",
         type=str,

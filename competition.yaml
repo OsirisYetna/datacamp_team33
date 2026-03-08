@@ -1,13 +1,15 @@
 version: 2
 title: ChemSmiles classification
-description: 'Predict the inhi
+description: 'Predict the class of a molecule based on its SMILES representation.'
 image: logo.png
-registration_auto_approve: False  # if True, do not require approval from admin to join the comp
+registration_auto_approve: True  # if True, do not require approval from admin to join the comp
 
 terms: pages/terms.md
 pages:
   - title: Participation
     file: pages/participate.md
+  # - title: Starting Kit
+  #   file: pages/starting_kit.html
   - title: Seed
     file: pages/seed.md
   - title: Timeline
@@ -32,8 +34,8 @@ solutions:
 phases:
   - name: Development Phase
     description: 'Development phase: tune your models.'
-    start: 01-04-2026
-    end: 01-07-2026
+    start: 01-03-2026
+    end: 07-07-2026
     tasks:
       - 0
 
@@ -44,12 +46,12 @@ leaderboards:
       - title: Test Accuracy
         key: test
         index: 0
-        sorting: asc
+        sorting: desc
       - title: Train time
         key: train_time
         index: 1
-        sorting: desc
+        sorting: asc
       - title: Test time
         key: test_time
         index: 2
-        sorting: desc
+        sorting: asc
