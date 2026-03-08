@@ -14,13 +14,13 @@ if __name__ == "__main__":
     print("Docker client initialized successfully.")
 
     print("Building Docker image...")
-    client.images.build(path=".", tag="tommoral/template:v1")
+    client.images.build(path=".", dockerfile="tools/Dockerfile", tag="tommoral/template:v1", nocache=True)
     print("Docker image built successfully with tag 'tommoral/template:v1'.")
 
     print("Running Docker container...")
     logs = client.containers.run(
         image="tommoral/template:v1",
-        command="python3 /app/ingestion_program/ingestion.py",
+        command="python3 /app/ingestion_program/ingestion.py --submission-dir /app/ingested_program --data-dir /app/input_data",
         remove=True,
         name="ingestion",
         user="root",
@@ -34,7 +34,7 @@ if __name__ == "__main__":
     print(logs.decode("utf-8"))
     logs = client.containers.run(
         image="tommoral/template:v1",
-        command="python3 /app/scoring_program/scoring.py",
+        command="python3 /app/scoring_program/scoring.py --prediction-dir /app/input/res --reference-dir /app/input/ref --output-dir /app/output",
         remove=True,
         name="scoring",
         user="root",
