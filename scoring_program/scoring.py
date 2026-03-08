@@ -42,18 +42,21 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Scoring program for codabench"
     )
+    
     parser.add_argument(
         "--reference-dir",
         type=str,
         default="/app/input/ref",
         help="",
     )
+    
     parser.add_argument(
         "--prediction-dir",
         type=str,
         default="/app/input/res",
         help="",
     )
+    
     parser.add_argument(
         "--output-dir",
         type=str,

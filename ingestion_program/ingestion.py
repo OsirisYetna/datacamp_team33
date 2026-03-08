@@ -27,6 +27,8 @@ def get_data():
     return X_train, y_train, X_test
 
 
+
+
 def print_bar():
     """Display a separator bar."""
     print('-' * 10)
@@ -75,6 +77,7 @@ def main():
 
 
 if __name__ == '__main__':
+    #Define CLI commands
     parser = argparse.ArgumentParser(description="Ingestion program for codabench")
     parser.add_argument("--data-dir", type=str, default=input_dir)
     parser.add_argument("--output-dir", type=str, default=output_dir)
