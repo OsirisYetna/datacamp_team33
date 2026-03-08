@@ -8,8 +8,8 @@ terms: pages/terms.md
 pages:
   - title: Participation
     file: pages/participate.md
-  # - title: Starting Kit
-  #   file: pages/starting_kit.html
+  - title: Summary
+    file: pages/summary.md
   - title: Seed
     file: pages/seed.md
   - title: Timeline
