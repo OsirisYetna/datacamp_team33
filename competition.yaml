@@ -9,7 +9,7 @@ pages:
   - title: Participation
     file: pages/participate.md
   - title: Starting Kit
-    file: pages/starting_kit.md
+    file: pages/starting_kit.html
   - title: Seed
     file: pages/seed.md
   - title: Timeline
