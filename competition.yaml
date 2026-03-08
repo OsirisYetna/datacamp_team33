@@ -6,10 +6,10 @@ registration_auto_approve: True  # if True, do not require approval from admin t
 
 terms: pages/terms.md
 pages:
-  - title: Participation
-    file: pages/participate.md
   - title: Summary
     file: pages/summary.md
+  - title: Participation
+    file: pages/participate.md
   - title: Seed
     file: pages/seed.md
   - title: Timeline
