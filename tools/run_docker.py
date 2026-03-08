@@ -20,7 +20,7 @@ if __name__ == "__main__":
     print("Running Docker container...")
     logs = client.containers.run(
         image="tommoral/template:v1",
-        command="python3 /app/ingestion_program/ingestion.py --submission-dir /app/ingested_program --data-dir /app/input_data",
+        command="python3 /app/ingestion_program/ingestion.py",
         remove=True,
         name="ingestion",
         user="root",
@@ -34,7 +34,7 @@ if __name__ == "__main__":
     print(logs.decode("utf-8"))
     logs = client.containers.run(
         image="tommoral/template:v1",
-        command="python3 /app/scoring_program/scoring.py --prediction-dir /app/input/res --reference-dir /app/input/ref --output-dir /app/output",
+        command="python3 /app/scoring_program/scoring.py",
         remove=True,
         name="scoring",
         user="root",
